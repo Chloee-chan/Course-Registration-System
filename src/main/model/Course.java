@@ -5,14 +5,12 @@ public class Course {
     private String name;
     private int credit;
     private int maxStudents;
-    private Faculty faculty;
 
-    public Course(String id, String name, int credit, int maxStudents, Faculty faculty) {
+    public Course(String id, String name, int credit, int maxStudents) {
         this.id = id;
         this.name = name;
         this.credit = credit;
         this.maxStudents = maxStudents;
-        this.faculty = faculty;
     }
 
     public String getId() {
@@ -47,11 +45,4 @@ public class Course {
         this.maxStudents = maxStudents;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
 }
