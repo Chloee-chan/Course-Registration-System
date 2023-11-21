@@ -21,7 +21,8 @@ public class JdbcAccountRepository implements AccountRepository {
     public Account findByUsername(String username) {
         try {
             PreparedStatement statement = this.connection.prepareStatement(
-                    String.format("SELECT * FROM account WHERE username=%s", username));
+                    "SELECT * FROM account WHERE username=?");
+            statement.setString(1, username);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 return new Account(

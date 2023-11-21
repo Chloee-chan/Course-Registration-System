@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.controller.LoginController">
     <HBox prefHeight="500.0" prefWidth="800.0">
-        <ImageView fitHeight="500.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true" />
-        <Pane prefHeight="500.0" prefWidth="450.0">
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="75.0" prefHeight="36.0"
-                   prefWidth="200.0" text="Hello, there!" textAlignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: FFC5C5;">
+            <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Donate me!" textAlignment="CENTER">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="16.0" />
+               </VBox.margin>
+            </Text>
+                <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/image/qrcode.png" />
+               </image></ImageView>
+            </children>
+        </VBox>
+        <Pane prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: ECF4D6;">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="125.0" layoutY="75.0" prefHeight="36.0" prefWidth="200.0" text="Hello, there!" textAlignment="CENTER">
                 <font>
-                    <Font size="32.0"/>
+                    <Font size="32.0" />
                 </font>
             </Label>
             <BorderPane layoutY="200.0" prefHeight="300.0" prefWidth="450.0">
@@ -21,48 +44,52 @@
                     <VBox prefHeight="300.0" prefWidth="370.0" BorderPane.alignment="CENTER">
                         <Label prefHeight="24.0" prefWidth="200.0" text="Uesrname">
                             <VBox.margin>
-                                <Insets bottom="8.0" left="80.0"/>
+                                <Insets bottom="8.0" left="80.0" />
                             </VBox.margin>
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </Label>
-                        <TextField prefHeight="32.0">
+                        <TextField id="usernameField" fx:id="usernameField" onKeyPressed="#pressEnter" prefHeight="32.0">
                             <VBox.margin>
-                                <Insets bottom="8.0" left="80.0" right="80.0"/>
+                                <Insets bottom="8.0" left="80.0" right="80.0" />
                             </VBox.margin>
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </TextField>
                         <Label prefHeight="24.0" prefWidth="200.0" text="Password">
                             <VBox.margin>
-                                <Insets bottom="8.0" left="80.0"/>
+                                <Insets bottom="8.0" left="80.0" />
                             </VBox.margin>
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </Label>
-                        <PasswordField prefHeight="32.0">
+                        <PasswordField id="passwordField" fx:id="passwordField" onKeyPressed="#pressEnter" prefHeight="32.0">
                             <VBox.margin>
-                                <Insets bottom="8.0" left="80.0" right="80.0"/>
+                                <Insets bottom="8.0" left="80.0" right="80.0" />
                             </VBox.margin>
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                         </PasswordField>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0"
-                                prefWidth="290.0" text="Login" textAlignment="CENTER">
+                        <Button id="buttonLogin" fx:id="buttonLogin" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#pressLogin" prefHeight="32.0" prefWidth="290.0" text="Login" textAlignment="CENTER">
                             <font>
-                                <Font size="16.0"/>
+                                <Font size="16.0" />
                             </font>
                             <VBox.margin>
-                                <Insets left="80.0" right="80.0" top="24.0"/>
+                                <Insets left="80.0" right="80.0" top="24.0" />
                             </VBox.margin>
                         </Button>
                     </VBox>
                 </center>
             </BorderPane>
+         <Text fx:id="loginError" fill="#dc8686" layoutX="100.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid username or password!" textAlignment="CENTER" wrappingWidth="249.26036071777344">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Text>
         </Pane>
     </HBox>
 </AnchorPane>
