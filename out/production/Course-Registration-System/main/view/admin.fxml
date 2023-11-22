@@ -183,7 +183,7 @@
                      <children>
                         <Button layoutX="172.0" layoutY="24.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Save" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="24.0" />
                         <Button layoutX="300.0" layoutY="21.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="24.0" />
-                        <Button layoutX="50.0" layoutY="31.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Search" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="50.0" layoutY="31.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Button" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
                      </children>
                   </AnchorPane>
                </children>
