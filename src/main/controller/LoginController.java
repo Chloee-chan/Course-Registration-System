@@ -17,12 +17,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import main.Main;
 import main.dao.JdbcAccountRepository;
+import main.dao.JdbcStudentRepository;
 import main.model.Account;
 import main.repository.AccountRepository;
+import main.repository.StudentRepository;
 
 public class LoginController implements Initializable {
 
     private AccountRepository accountRepository = new JdbcAccountRepository();
+    private StudentRepository studentRepository = new JdbcStudentRepository();
 
     @FXML
     private Text loginError;
@@ -58,8 +61,12 @@ public class LoginController implements Initializable {
                     adminController.setUsername(username);
                     Main.getMainStage().setScene(new Scene(adminPane));
                 } else if (account.getRole().equals(Account.Role.STUDENT)) {
-                    Main.getMainStage()
-                            .setScene(new Scene(FXMLLoader.load(getClass().getResource("/main/view/student.fxml"))));
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/main/view/student.fxml"));
+                    AnchorPane studentPane = loader.load();
+                    StudentController studentController = loader.getController();
+                    studentController.setSession(studentRepository.findStudentByUsername(username));
+                    Main.getMainStage().setScene(new Scene(studentPane));
                 } else {
                     Main.getMainStage()
                             .setScene(new Scene(FXMLLoader.load(getClass().getResource("/main/view/faculty.fxml"))));
