@@ -188,4 +188,49 @@ public class JdbcCourseRepository implements CourseRepository {
         }
         return null;
     }
+
+    @Override
+    public List<Course> findCourseNotRegisterByFaculty() {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id, name, credit, max_student FROM course WHERE faculty_id IS NULL");
+            ResultSet resultSet = statement.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while (resultSet.next()) {
+                courses.add(
+                        new Course(
+                                resultSet.getString("id"),
+                                resultSet.getString("name"),
+                                resultSet.getInt("credit"),
+                                resultSet.getInt("max_student")));
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Course> findCourseRegisteredByFacultyId(String facultyId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id, name, credit, max_student FROM course WHERE faculty_id=?");
+            statement.setString(1, facultyId);
+            ResultSet resultSet = statement.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while (resultSet.next()) {
+                courses.add(
+                        new Course(
+                                resultSet.getString("id"),
+                                resultSet.getString("name"),
+                                resultSet.getInt("credit"),
+                                resultSet.getInt("max_student")));
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

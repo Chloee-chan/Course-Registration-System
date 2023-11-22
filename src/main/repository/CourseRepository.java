@@ -13,4 +13,6 @@ public interface CourseRepository {
     int findCurrentStudentByCourseId(String courseId);
     List<Course> findCourseNotRegisterByStudentId(String studentId);
     List<Course> findCourseRegisteredByStudentId(String studentId);
+    List<Course> findCourseNotRegisterByFaculty();
+    List<Course> findCourseRegisteredByFacultyId(String facultyId);
 }
