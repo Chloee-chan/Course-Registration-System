@@ -86,6 +86,85 @@ public class AdminController implements Initializable {
     private Text deleteFailed;
 
     @FXML
+    private TextField courseIdEdit;
+
+    @FXML
+    private TextField courseNameEdit;
+
+    @FXML
+    private TextField courseCreditEdit;
+
+    @FXML
+    private TextField courseMaxStudentEdit;
+
+    @FXML
+    private Text searchFound;
+
+    @FXML
+    private Text searchNotFound;
+
+    @FXML
+    private Text saveCompletedEdit;
+
+    @FXML
+    private Text saveFailedEdit;
+
+    @FXML
+    private void searchEditPressed() {
+        Course course = courseRepository.findById(courseIdEdit.getText());
+        if (course != null) {
+            courseNameEdit.setText(course.getName());
+            courseCreditEdit.setText(course.getCredit() + "");
+            courseMaxStudentEdit.setText(course.getMaxStudents() + "");
+            searchFound.setVisible(true);
+            searchNotFound.setVisible(false);
+        } else {
+            courseIdEdit.setText("");
+            searchFound.setVisible(false);
+            searchNotFound.setVisible(true);
+        }
+        saveCompletedEdit.setVisible(false);
+        saveFailedEdit.setVisible(false);
+    }
+
+    @FXML
+    private void saveEditPressed() {
+        try {
+            Course course = new Course(
+                    courseIdEdit.getText(),
+                    courseNameEdit.getText(),
+                    Integer.parseInt(courseCreditEdit.getText()),
+                    Integer.parseInt(courseMaxStudentEdit.getText()));
+            int result = courseRepository.update(course);
+            if (result == 1) {
+                saveCompletedEdit.setVisible(true);
+                saveFailedEdit.setVisible(false);
+            }
+        } catch (NumberFormatException e) {
+            saveCompletedEdit.setVisible(false);
+            saveFailedEdit.setVisible(true);
+        }
+        courseIdEdit.setText("");
+        courseNameEdit.setText("");
+        courseCreditEdit.setText("");
+        courseMaxStudentEdit.setText("");
+        searchFound.setVisible(false);
+        searchNotFound.setVisible(false);
+    }
+
+    @FXML
+    private void cancelEditPressed() {
+        courseIdEdit.setText("");
+        courseNameEdit.setText("");
+        courseCreditEdit.setText("");
+        courseMaxStudentEdit.setText("");
+        searchFound.setVisible(false);
+        searchNotFound.setVisible(false);
+        saveCompletedEdit.setVisible(false);
+        saveFailedEdit.setVisible(false);
+    }
+
+    @FXML
     private void saveCreatePressed() {
         try {
             Course course = new Course(
@@ -195,6 +274,14 @@ public class AdminController implements Initializable {
         createCoursePane.setVisible(false);
         editCoursePane.setVisible(true);
         deleteCoursePane.setVisible(false);
+        courseIdEdit.setText("");
+        courseNameEdit.setText("");
+        courseCreditEdit.setText("");
+        courseMaxStudentEdit.setText("");
+        searchFound.setVisible(false);
+        searchNotFound.setVisible(false);
+        saveCompletedEdit.setVisible(false);
+        saveFailedEdit.setVisible(false);
     }
 
     @FXML

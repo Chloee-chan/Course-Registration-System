@@ -106,4 +106,24 @@ public class JdbcCourseRepository implements CourseRepository {
         }
         return -1;
     }
+
+    @Override
+    public Course findById(String id) {
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(
+                    "SELECT * FROM course WHERE id = ?");
+            statement.setString(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Course(
+                        resultSet.getString("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("credit"),
+                        resultSet.getInt("max_student"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

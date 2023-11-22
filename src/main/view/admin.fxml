@@ -68,12 +68,12 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="viewCoursePane" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="viewCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <TableView fx:id="viewCourseTable" layoutX="247.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="createCoursePane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="createCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <VBox layoutX="48.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -139,7 +139,7 @@
             <Text fx:id="deleteFailed" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Detele Failed!" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="400.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editCoursePane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="editCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -148,7 +148,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseIdEdit">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -158,7 +158,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseNameEdit">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -168,7 +168,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseCreditEdit">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -178,16 +178,20 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseMaxStudentEdit">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
                   </TextField>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="172.0" layoutY="24.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Save" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="24.0" />
-                        <Button layoutX="300.0" layoutY="21.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="24.0" />
-                        <Button layoutX="50.0" layoutY="31.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Search" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="172.0" layoutY="24.0" mnemonicParsing="false" onAction="#saveEditPressed" prefHeight="32.0" prefWidth="100.0" text="Save" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="300.0" layoutY="21.0" mnemonicParsing="false" onAction="#cancelEditPressed" prefHeight="32.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="50.0" layoutY="31.0" mnemonicParsing="false" onAction="#searchEditPressed" prefHeight="32.0" prefWidth="100.0" text="Search" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
+                        <Text fx:id="searchFound" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Found!" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="60.0" />
+                        <Text fx:id="searchNotFound" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Not Found!" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="60.0" />
+                        <Text fx:id="saveCompletedEdit" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="saveCompleted!" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="60.0" />
+                        <Text fx:id="saveFailedEdit" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Failed!" AnchorPane.leftAnchor="174.0" AnchorPane.topAnchor="60.0" />
                      </children>
                   </AnchorPane>
                </children>

@@ -9,4 +9,5 @@ public interface CourseRepository {
     int add(Course course);
     List<Course> findAll();
     int deleteById(String courseId);
+    Course findById(String id);
 }
