@@ -78,7 +78,7 @@ public class JdbcCourseRepository implements CourseRepository {
                                 resultSet.getString("id"),
                                 resultSet.getString("name"),
                                 resultSet.getInt("credit"),
-                                resultSet.getInt("max_students")));
+                                resultSet.getInt("max_student")));
             }
             return courses;
         } catch (SQLException e) {

@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -57,6 +58,60 @@ public class AdminController implements Initializable {
     @FXML
     private TableView<Course> viewCourseTable;
 
+    @FXML
+    private Text saveFailedCreate;
+
+    @FXML
+    private Text saveCompletedCreate;
+
+    @FXML
+    private TextField courseIdCreate;
+
+    @FXML
+    private TextField courseNameCreate;
+
+    @FXML
+    private TextField courseCreditCreate;
+
+    @FXML
+    private TextField courseMaxStudentCreate;
+
+    @FXML
+    private void saveCreatePressed() {
+        try {
+            Course course = new Course(
+                    courseIdCreate.getText(),
+                    courseNameCreate.getText(),
+                    Integer.parseInt(courseCreditCreate.getText()),
+                    Integer.parseInt(courseMaxStudentCreate.getText()));
+            int result = courseRepository.add(course);
+            if (result == 1) {
+                saveCompletedCreate.setVisible(true);
+                saveFailedCreate.setVisible(false);
+            } else {
+                saveCompletedCreate.setVisible(false);
+                saveFailedCreate.setVisible(true);
+            }
+        } catch (NumberFormatException e) {
+            saveCompletedCreate.setVisible(false);
+            saveFailedCreate.setVisible(true);
+        }
+        courseIdCreate.setText("");
+        courseNameCreate.setText("");
+        courseCreditCreate.setText("");
+        courseMaxStudentCreate.setText("");
+    }
+
+    @FXML
+    private void cancelCreatePressed() {
+        courseIdCreate.setText("");
+        courseNameCreate.setText("");
+        courseCreditCreate.setText("");
+        courseMaxStudentCreate.setText("");
+        saveCompletedCreate.setVisible(false);
+        saveFailedCreate.setVisible(false);
+    }
+
     @SuppressWarnings("unchecked")
     private void showCoursesToView() {
         viewCourseTable.getColumns().clear();
@@ -85,7 +140,6 @@ public class AdminController implements Initializable {
         createCoursePane.setVisible(false);
         editCoursePane.setVisible(false);
         deleteCoursePane.setVisible(false);
-
         showCoursesToView();
     }
 
@@ -95,6 +149,8 @@ public class AdminController implements Initializable {
         createCoursePane.setVisible(true);
         editCoursePane.setVisible(false);
         deleteCoursePane.setVisible(false);
+        saveCompletedCreate.setVisible(false);
+        saveFailedCreate.setVisible(false);
     }
 
     @FXML

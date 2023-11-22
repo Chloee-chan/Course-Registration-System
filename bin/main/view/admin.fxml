@@ -68,15 +68,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="deleteCoursePane" layoutX="386.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-         <children>
-            <Text layoutX="40.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID" wrappingWidth="104.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
-            <TextField layoutX="40.0" layoutY="373.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="368.0" />
-            <Button layoutX="314.0" layoutY="368.0" mnemonicParsing="false" text="Delete" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="368.0" />
-            <TableView fx:id="tableResult" layoutX="260.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="viewCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="viewCoursePane" disable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <TableView fx:id="viewCourseTable" layoutX="247.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
@@ -90,7 +82,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseIdCreate">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -100,7 +92,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseNameCreate">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -110,7 +102,7 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseCreditCreate">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
@@ -120,22 +112,32 @@
                         <Insets bottom="12.0" left="48.0" top="24.0" />
                      </VBox.margin>
                   </Text>
-                  <TextField>
+                  <TextField fx:id="courseMaxStudentCreate">
                      <VBox.margin>
                         <Insets left="48.0" right="280.0" />
                      </VBox.margin>
                   </TextField>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="152.0" layoutY="24.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Save" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="24.0" />
-                        <Button layoutX="300.0" layoutY="21.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="152.0" layoutY="24.0" mnemonicParsing="false" onAction="#saveCreatePressed" prefHeight="32.0" prefWidth="100.0" text="Save" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="24.0" />
+                        <Button layoutX="300.0" layoutY="21.0" mnemonicParsing="false" onAction="#cancelCreatePressed" prefHeight="32.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="24.0" />
+                        <Text fx:id="saveCompletedCreate" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Completed!" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
+                        <Text fx:id="saveFailedCreate" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Failed!" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="24.0" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="deleteCoursePane" disable="true" layoutX="386.0" layoutY="135.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <Text layoutX="40.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID" wrappingWidth="104.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
+            <TextField layoutX="40.0" layoutY="373.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="368.0" />
+            <Button layoutX="314.0" layoutY="368.0" mnemonicParsing="false" text="Delete" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="368.0" />
+            <TableView fx:id="tableResult" layoutX="260.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="editCoursePane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
