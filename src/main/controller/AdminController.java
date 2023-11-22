@@ -56,7 +56,10 @@ public class AdminController implements Initializable {
     private Button editCourseButton;
 
     @FXML
-    private TableView<Course> viewCourseTable;
+    private TableView<Course> viewCourseTableView;
+
+    @FXML
+    private TableView<Course> viewCourseTableDelete;
 
     @FXML
     private Text saveFailedCreate;
@@ -201,9 +204,9 @@ public class AdminController implements Initializable {
     }
 
     @SuppressWarnings("unchecked")
-    private void showCoursesToView() {
-        viewCourseTable.getColumns().clear();
-        viewCourseTable.getItems().clear();
+    private void showCoursesToView(TableView<Course> table) {
+        table.getColumns().clear();
+        table.getItems().clear();
 
         TableColumn<Course, String> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -217,9 +220,9 @@ public class AdminController implements Initializable {
         TableColumn<Course, String> slotColumn = new TableColumn<>("Slots");
         creditsColumn.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
 
-        viewCourseTable.getColumns().addAll(idColumn, nameColumn, creditsColumn, slotColumn);
+        table.getColumns().addAll(idColumn, nameColumn, creditsColumn, slotColumn);
 
-        viewCourseTable.setItems(FXCollections.observableArrayList(courseRepository.findAll()));
+        table.setItems(FXCollections.observableArrayList(courseRepository.findAll()));
     }
 
     @FXML
@@ -228,7 +231,7 @@ public class AdminController implements Initializable {
         createCoursePane.setVisible(false);
         editCoursePane.setVisible(false);
         deleteCoursePane.setVisible(false);
-        showCoursesToView();
+        showCoursesToView(viewCourseTableView);
     }
 
     @FXML
@@ -251,7 +254,7 @@ public class AdminController implements Initializable {
         deleteFailed.setVisible(false);
         courseIdDelete.setText("");
 
-        showCoursesToView();
+        showCoursesToView(viewCourseTableDelete);
     }
 
     @FXML
@@ -260,7 +263,7 @@ public class AdminController implements Initializable {
         if (result == 1) {
             deleteCompleted.setVisible(true);
             deleteFailed.setVisible(false);
-            showCoursesToView();
+            showCoursesToView(viewCourseTableDelete);
         } else {
             deleteCompleted.setVisible(false);
             deleteFailed.setVisible(true);
