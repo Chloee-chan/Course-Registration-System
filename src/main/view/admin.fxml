@@ -68,12 +68,12 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane fx:id="viewCoursePane" disable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="viewCoursePane" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <TableView fx:id="viewCourseTable" layoutX="247.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="createCoursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="createCoursePane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <VBox layoutX="48.0" layoutY="24.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -129,12 +129,14 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteCoursePane" disable="true" layoutX="386.0" layoutY="135.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="deleteCoursePane" layoutX="386.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <Text layoutX="40.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID" wrappingWidth="104.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0" />
-            <TextField layoutX="40.0" layoutY="373.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="368.0" />
-            <Button layoutX="314.0" layoutY="368.0" mnemonicParsing="false" text="Delete" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="368.0" />
-            <TableView fx:id="tableResult" layoutX="260.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TextField fx:id="courseIdDelete" layoutX="40.0" layoutY="373.0" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="368.0" />
+            <Button layoutX="314.0" layoutY="368.0" mnemonicParsing="false" onAction="#deleteCoursePressed" text="Delete" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="368.0" />
+            <TableView fx:id="viewCourseTable" layoutX="260.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Text fx:id="deleteCompleted" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Delete Completed!" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="400.0" />
+            <Text fx:id="deleteFailed" fill="#dc8686" strokeType="OUTSIDE" strokeWidth="0.0" text="Detele Failed!" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="400.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="editCoursePane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">

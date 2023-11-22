@@ -77,6 +77,15 @@ public class AdminController implements Initializable {
     private TextField courseMaxStudentCreate;
 
     @FXML
+    private TextField courseIdDelete;
+
+    @FXML
+    private Text deleteCompleted;
+
+    @FXML
+    private Text deleteFailed;
+
+    @FXML
     private void saveCreatePressed() {
         try {
             Course course = new Course(
@@ -159,6 +168,25 @@ public class AdminController implements Initializable {
         createCoursePane.setVisible(false);
         editCoursePane.setVisible(false);
         deleteCoursePane.setVisible(true);
+        deleteCompleted.setVisible(false);
+        deleteFailed.setVisible(false);
+        courseIdDelete.setText("");
+
+        showCoursesToView();
+    }
+
+    @FXML
+    private void deleteCoursePressed() {
+        int result = courseRepository.deleteById(courseIdDelete.getText());
+        if (result == 1) {
+            deleteCompleted.setVisible(true);
+            deleteFailed.setVisible(false);
+            showCoursesToView();
+        } else {
+            deleteCompleted.setVisible(false);
+            deleteFailed.setVisible(true);
+        }
+        courseIdDelete.setText("");
     }
 
     @FXML
