@@ -19,6 +19,7 @@ import main.Main;
 import main.dao.JdbcAccountRepository;
 import main.dao.JdbcStudentRepository;
 import main.model.Account;
+import main.model.Student;
 import main.repository.AccountRepository;
 import main.repository.StudentRepository;
 
@@ -61,11 +62,12 @@ public class LoginController implements Initializable {
                     adminController.setUsername(username);
                     Main.getMainStage().setScene(new Scene(adminPane));
                 } else if (account.getRole().equals(Account.Role.STUDENT)) {
+                    Student student = studentRepository.findByUsername(username);
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/main/view/student.fxml"));
                     AnchorPane studentPane = loader.load();
                     StudentController studentController = loader.getController();
-                    studentController.setSession(studentRepository.findStudentByUsername(username));
+                    studentController.setSession(student);
                     Main.getMainStage().setScene(new Scene(studentPane));
                 } else {
                     Main.getMainStage()

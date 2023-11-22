@@ -42,7 +42,7 @@
             <BorderPane layoutY="200.0" prefHeight="300.0" prefWidth="450.0">
                 <center>
                     <VBox prefHeight="300.0" prefWidth="370.0" BorderPane.alignment="CENTER">
-                        <Label prefHeight="24.0" prefWidth="200.0" text="Uesrname">
+                        <Label prefHeight="24.0" prefWidth="200.0" text="Username">
                             <VBox.margin>
                                 <Insets bottom="8.0" left="80.0" />
                             </VBox.margin>

@@ -10,4 +10,5 @@ public interface CourseRepository {
     List<Course> findAll();
     int deleteById(String courseId);
     Course findById(String id);
+    int findCurrentStudentByCourseId(String courseId);
 }

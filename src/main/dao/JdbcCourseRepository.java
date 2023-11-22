@@ -126,4 +126,20 @@ public class JdbcCourseRepository implements CourseRepository {
         }
         return null;
     }
+
+    @Override
+    public int findCurrentStudentByCourseId(String courseId) {
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(
+                    "SELECT COUNT(student_id) from register JOIN course ON course.id = register.course_id WHERE course.id = ?");
+            statement.setString(1, courseId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }

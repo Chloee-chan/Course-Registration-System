@@ -5,12 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import main.component.MySQLConnector;
 import main.model.Student;
 import main.repository.StudentRepository;
 
 public class JdbcStudentRepository implements StudentRepository {
 
     private Connection connection;
+
+    public JdbcStudentRepository() {
+        this.connection = MySQLConnector.connect();
+    }
 
     @Override
     public int update(Student student) {
@@ -61,7 +66,7 @@ public class JdbcStudentRepository implements StudentRepository {
     public int withDrawCourse(String studentId, String courseId) {
         try {
             PreparedStatement statement = this.connection
-                    .prepareStatement("DELETE FROM register WHERE student_id=?, course_id=?");
+                    .prepareStatement("DELETE FROM register WHERE student_id=? AND course_id=?");
             statement.setString(1, studentId);
             statement.setString(2, courseId);
             int rowEffected = statement.executeUpdate();
@@ -79,7 +84,7 @@ public class JdbcStudentRepository implements StudentRepository {
     }
 
     @Override
-    public Student findStudentByUsername(String username) {
+    public Student findByUsername(String username) {
         try {
             PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM student WHERE account_id=?");
             statement.setString(1, username);
@@ -97,5 +102,23 @@ public class JdbcStudentRepository implements StudentRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public int isRegisteredCourse(String studentId, String courseId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM register WHERE student_id=? AND course_id=?");
+            statement.setString(1, studentId);
+            statement.setString(2, courseId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }
