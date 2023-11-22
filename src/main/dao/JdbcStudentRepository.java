@@ -103,22 +103,4 @@ public class JdbcStudentRepository implements StudentRepository {
         }
         return null;
     }
-
-    @Override
-    public int isRegisteredCourse(String studentId, String courseId) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM register WHERE student_id=? AND course_id=?");
-            statement.setString(1, studentId);
-            statement.setString(2, courseId);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
 }

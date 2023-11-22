@@ -11,4 +11,6 @@ public interface CourseRepository {
     int deleteById(String courseId);
     Course findById(String id);
     int findCurrentStudentByCourseId(String courseId);
+    List<Course> findCourseNotRegisterByStudentId(String studentId);
+    List<Course> findCourseRegisteredByStudentId(String studentId);
 }

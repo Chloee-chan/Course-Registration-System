@@ -2,9 +2,8 @@ package main.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,13 +20,8 @@ import main.dao.JdbcCourseRepository;
 import main.dao.JdbcStudentRepository;
 import main.model.Course;
 import main.model.Student;
-import main.repository.CourseRepository;
-import main.repository.StudentRepository;
 
 public class StudentController implements Initializable {
-
-    private CourseRepository courseRepository = new JdbcCourseRepository();
-    private StudentRepository studentRepository = new JdbcStudentRepository();
 
     private Student session;
 
@@ -68,7 +62,10 @@ public class StudentController implements Initializable {
     private TextField courseId;
 
     @FXML
-    private TableView<Course> courseListView;
+    private TableView<Course> courseNotRegister;
+
+    @FXML
+    private TableView<Course> courseRegisted;
 
     @FXML
     private Text registerCompleted;
@@ -82,16 +79,12 @@ public class StudentController implements Initializable {
     @FXML
     private Text withdrawFailed;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        editInfoPane.setVisible(false);
-        coursePane.setVisible(false);
-    }
-
     @SuppressWarnings("unchecked")
     private void showCourseList() {
-        courseListView.getColumns().clear();
-        courseListView.getItems().clear();
+        courseNotRegister.getColumns().clear();
+        courseNotRegister.getItems().clear();
+        courseRegisted.getColumns().clear();
+        courseRegisted.getItems().clear();
 
         TableColumn<Course, String> idColumn = new TableColumn<>("ID");
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -103,30 +96,47 @@ public class StudentController implements Initializable {
         creditsColumn.setCellValueFactory(new PropertyValueFactory<>("credit"));
 
         TableColumn<Course, String> slotColumn = new TableColumn<>("Slots");
-        creditsColumn.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
+        slotColumn.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
 
-        courseListView.getColumns().addAll(idColumn, nameColumn, creditsColumn, slotColumn);
+        TableColumn<Course, String> idColumn2 = new TableColumn<>("ID");
+        idColumn2.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        courseListView.setItems(FXCollections.observableArrayList(
-                courseRepository.findAll().stream()
-                        .filter(e -> {
-                            int currentStudent = courseRepository.findCurrentStudentByCourseId(e.getId());
-                            return currentStudent >= 0 && currentStudent <= e.getMaxStudents() && studentRepository.isRegisteredCourse(this.session.getId(), e.getId()) == 0;
-                        })
-                        .collect(Collectors.toList())));
+        TableColumn<Course, String> nameColumn2 = new TableColumn<>("Name");
+        nameColumn2.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Course, String> creditsColumn2 = new TableColumn<>("Credit");
+        creditsColumn2.setCellValueFactory(new PropertyValueFactory<>("credit"));
+
+        TableColumn<Course, String> slotColumn2 = new TableColumn<>("Slots");
+        slotColumn2.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
+
+        courseNotRegister.getColumns().addAll(idColumn, nameColumn, creditsColumn, slotColumn);
+        List<Course> list1 = new JdbcCourseRepository().findCourseNotRegisterByStudentId(session.getId());
+        courseNotRegister.setItems(FXCollections.observableArrayList(list1));
+        
+        courseRegisted.getColumns().addAll(idColumn2, nameColumn2, creditsColumn2, slotColumn2);
+        List<Course> list2 = new JdbcCourseRepository().findCourseRegisteredByStudentId(session.getId());
+        System.out.println(list2);
+        courseRegisted.setItems(FXCollections.observableArrayList(list2));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        editInfoPane.setVisible(false);
+        coursePane.setVisible(false);
     }
 
     @FXML
     private void registerPressed() {
-        int result = studentRepository.registerCourse(this.session.getId(), courseId.getText());
+        int result = new JdbcStudentRepository().registerCourse(this.session.getId(), courseId.getText());
         if (result == 1) {
             registerCompleted.setVisible(true);
             registerFailed.setVisible(false);
+            showCourseList();
         } else {
             registerCompleted.setVisible(false);
             registerFailed.setVisible(true);
         }
-        showCourseList();
         courseId.setText("");
         withdrawCompleted.setVisible(false);
         withdrawFailed.setVisible(false);
@@ -134,15 +144,15 @@ public class StudentController implements Initializable {
 
     @FXML
     private void withdrawPressed() {
-        int result = studentRepository.withDrawCourse(this.session.getId(), courseId.getText());
+        int result = new JdbcStudentRepository().withDrawCourse(this.session.getId(), courseId.getText());
         if (result == 1) {
             withdrawCompleted.setVisible(true);
             withdrawFailed.setVisible(false);
+            showCourseList();
         } else {
             withdrawCompleted.setVisible(false);
             withdrawFailed.setVisible(true);
         }
-        showCourseList();
         courseId.setText("");
         registerCompleted.setVisible(false);
         registerFailed.setVisible(false);
@@ -150,11 +160,13 @@ public class StudentController implements Initializable {
 
     @FXML
     void cancelEditPressed() {
-        courseId.setText("");
-        registerCompleted.setVisible(false);
-        registerFailed.setVisible(false);
-        withdrawCompleted.setVisible(false);
-        withdrawFailed.setVisible(false);
+        nameStudentEdit.setText("");
+        addressStudentEdit.setText("");
+        phoneStudentEdit.setText("");
+        emailStudentEdit.setText("");
+        classStudentEdit.setText("");
+        saveCompletedEdit.setVisible(false);
+        saveFailedEdit.setVisible(false);
     }
 
     @FXML
@@ -164,7 +176,7 @@ public class StudentController implements Initializable {
         this.session.setPhoneNumber(phoneStudentEdit.getText());
         this.session.setEmail(emailStudentEdit.getText());
         this.session.setClassId(classStudentEdit.getText());
-        int result = studentRepository.update(this.session);
+        int result = new JdbcStudentRepository().update(this.session);
         if (result == 1) {
             saveCompletedEdit.setVisible(true);
             saveFailedEdit.setVisible(false);

@@ -45,4 +45,9 @@ public class Course {
         this.maxStudents = maxStudents;
     }
 
+    @Override
+    public String toString() {
+        return "Course [id=" + id + ", name=" + name + ", credit=" + credit + ", maxStudents=" + maxStudents + "]";
+    }
+
 }

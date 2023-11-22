@@ -142,4 +142,50 @@ public class JdbcCourseRepository implements CourseRepository {
         }
         return -1;
     }
+
+    @Override
+    public List<Course> findCourseNotRegisterByStudentId(String studentId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id, name, credit, max_student FROM course WHERE id NOT IN(SELECT course_id from register WHERE student_id=?);");
+            statement.setString(1, studentId);
+            ResultSet resultSet = statement.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while (resultSet.next()) {
+                courses.add(
+                        new Course(
+                                resultSet.getString("id"),
+                                resultSet.getString("name"),
+                                resultSet.getInt("credit"),
+                                resultSet.getInt("max_student")));
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Course> findCourseRegisteredByStudentId(String studentId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT id, name, credit, max_student FROM course JOIN register ON register.course_id = course.id WHERE register.student_id=?");
+            statement.setString(1, studentId);
+            ResultSet resultSet = statement.executeQuery();
+            List<Course> courses = new ArrayList<>();
+            while (resultSet.next()) {
+                courses.add(
+                        new Course(
+                                resultSet.getString("id"),
+                                resultSet.getString("name"),
+                                resultSet.getInt("credit"),
+                                resultSet.getInt("max_student")));
+            }
+            return courses;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

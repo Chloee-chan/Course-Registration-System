@@ -86,7 +86,8 @@
       </AnchorPane>
       <AnchorPane fx:id="coursePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ECF4D6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <TableView fx:id="courseListView" layoutX="224.0" layoutY="91.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TableView fx:id="courseNotRegister" layoutX="224.0" layoutY="91.0" prefHeight="300.0" prefWidth="331.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="0.0" />
+            <TableView fx:id="courseRegisted" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Course ID" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="324.0" />
             <TextField fx:id="courseId" prefWidth="200.0" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="348.0" />
             <Button mnemonicParsing="false" onAction="#registerPressed" prefWidth="80.0" text="Register" AnchorPane.leftAnchor="296.0" AnchorPane.topAnchor="348.0" />

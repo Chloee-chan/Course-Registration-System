@@ -218,7 +218,7 @@ public class AdminController implements Initializable {
         creditsColumn.setCellValueFactory(new PropertyValueFactory<>("credit"));
 
         TableColumn<Course, String> slotColumn = new TableColumn<>("Slots");
-        creditsColumn.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
+        slotColumn.setCellValueFactory(new PropertyValueFactory<>("maxStudents"));
 
         table.getColumns().addAll(idColumn, nameColumn, creditsColumn, slotColumn);
 

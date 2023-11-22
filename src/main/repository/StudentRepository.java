@@ -7,5 +7,4 @@ public interface StudentRepository {
     int registerCourse(String studentId, String courseId);
     int withDrawCourse(String studentId, String courseId);
     Student findByUsername(String username);
-    int isRegisteredCourse(String studentId, String courseId);
 }
